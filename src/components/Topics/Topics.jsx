@@ -22,6 +22,9 @@ const Topics = () => {
 							</li>
 						);
 					})}
+					<li key='All articles'>
+						<Link to={'/articles'}>All articles</Link>
+					</li>
 				</ul>
 			</div>
 		</main>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getArticles } from '../utils/api';
+import { Link } from 'react-router-dom';
 
 const Articles = () => {
 	const [articles, setArticles] = useState([]);
@@ -21,6 +22,9 @@ const Articles = () => {
 							<h3>Author:{article.author}</h3>
 							<p>{article.body}</p>
 							<p>Topic:{article.topic}</p>
+							<Link to={`/articles/article/${article.article_id}`}>
+								See More
+							</Link>
 						</li>
 					);
 				})}
