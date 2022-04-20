@@ -31,3 +31,11 @@ export const patchVotesByID = (article_id) => {
 			return data;
 		});
 };
+
+export const getArticleCommentsByID = (article_id) => {
+	return articlesApi
+		.get(`/articles/${article_id}/comments`)
+		.then(({ data }) => {
+			return data;
+		});
+};
