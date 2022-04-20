@@ -4,11 +4,16 @@ import { getTopics } from '../../utils/api';
 
 const Topics = () => {
 	const [topics, setTopics] = useState([]);
+	const [err, setErr] = useState(null);
 
 	useEffect(() => {
-		getTopics().then(({ topics }) => {
-			setTopics(topics);
-		});
+		getTopics()
+			.then(({ topics }) => {
+				setTopics(topics);
+			})
+			.catch((err) => {
+				setErr('Topic not found, please add of try again');
+			});
 	}, []);
 
 	return (

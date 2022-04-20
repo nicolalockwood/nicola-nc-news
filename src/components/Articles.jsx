@@ -2,15 +2,26 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getArticles } from '../utils/api';
 import { Link } from 'react-router-dom';
+import Votes from './Votes';
 
 const Articles = () => {
 	const [articles, setArticles] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 	const { topic } = useParams();
 	useEffect(() => {
-		getArticles(topic).then(({ articles }) => {
-			setArticles(articles);
-		});
+		getArticles(topic)
+			.then(({ articles }) => {
+				setArticles(articles);
+				setIsLoading(false);
+			})
+			.catch((err) => {
+				console.log(err.response.data);
+			});
 	}, [topic]);
+
+	if (isLoading) {
+		return <p>Articles Loading...</p>;
+	}
 
 	return (
 		<main>
@@ -25,6 +36,10 @@ const Articles = () => {
 							<Link to={`/articles/article/${article.article_id}`}>
 								See More
 							</Link>
+							<Votes
+								votes={article.votes}
+								article_id={article.article_id}
+							></Votes>
 						</li>
 					);
 				})}
