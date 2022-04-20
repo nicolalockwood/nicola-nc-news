@@ -13,7 +13,6 @@ const Articles = () => {
 
 	return (
 		<main>
-			<h2>All Articles</h2>
 			<ul className='articlesList'>
 				{articles.map((article) => {
 					return (
