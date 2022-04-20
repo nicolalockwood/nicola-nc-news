@@ -1,7 +1,9 @@
 .App {
 	text-align: center;
 }
-
+.topic__list {
+	list-style-type: none;
+}
 .articlesList__article {
 	text-align: center;
 	display: grid;

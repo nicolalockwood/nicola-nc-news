@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getArticles } from '../utils/api';
 
 const Articles = () => {
 	const [articles, setArticles] = useState([]);
-
+	const { topic } = useParams();
 	useEffect(() => {
-		getArticles().then((articlesFromApi) => {
-			console.log(articlesFromApi.articles);
-			setArticles(articlesFromApi.articles);
+		getArticles(topic).then(({ articles }) => {
+			setArticles(articles);
 		});
-	}, []);
+	}, [topic]);
 
 	return (
 		<main>
