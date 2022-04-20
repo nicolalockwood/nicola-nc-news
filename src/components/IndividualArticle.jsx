@@ -5,11 +5,16 @@ import Comments from './Comments';
 const IndividualArticle = () => {
 	const { article_id } = useParams();
 	const [individualArticle, setIndividualArticle] = useState([]);
+	const [err, setErr] = useState(null);
 
 	useEffect(() => {
-		getArticlesByID(article_id).then(({ article }) => {
-			setIndividualArticle(article);
-		});
+		getArticlesByID(article_id)
+			.then(({ article }) => {
+				setIndividualArticle(article);
+			})
+			.catch((err) => {
+				setErr('Article not found');
+			});
 	}, [article_id]);
 	return (
 		<main>
