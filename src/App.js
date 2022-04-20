@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
-import Home from './components/Home';
+import Articles from './components/Articles';
 import IndividualArticle from './components/IndividualArticle';
-import ArticleByTopic from './components/ArticlebyTopic';
+
 import Login from './components/Login';
 import NavBar from './components/NavBar';
 
@@ -14,9 +14,10 @@ function App() {
 			<Login />
 			<NavBar />
 			<Routes>
-				<Route path='/' element={<Home />} />
-				<Route path='/articles/?topic=topic' element={<ArticleByTopic />} />
-				<Route path='/articles/article_id' element={<IndividualArticle />} />
+				<Route path='/' element={<Articles />} />
+				<Route path='/articles' element={<Articles />} />
+				<Route path='/articles/:topic' element={<Articles />} />
+				{/* <Route path='/articles/article_id' element={<IndividualArticle />} /> */}
 			</Routes>
 		</div>
 	);
