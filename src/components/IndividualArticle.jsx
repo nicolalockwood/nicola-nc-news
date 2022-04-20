@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getArticlesByID } from '../utils/api';
-import Articles from './Articles';
+import Comments from './Comments';
 const IndividualArticle = () => {
 	const { article_id } = useParams();
 	const [individualArticle, setIndividualArticle] = useState([]);
@@ -22,6 +22,7 @@ const IndividualArticle = () => {
 			<p>Created: {individualArticle.created_at}</p>
 			<p>Topic: {individualArticle.topic}</p>
 			<p>Votes: {individualArticle.votes}</p>
+			<Comments article_id={individualArticle.article_id}></Comments>
 		</main>
 	);
 };
