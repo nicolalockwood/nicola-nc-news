@@ -7,6 +7,7 @@ import Votes from './Votes';
 const Articles = () => {
 	const [articles, setArticles] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+
 	const { topic } = useParams();
 	useEffect(() => {
 		getArticles(topic)
