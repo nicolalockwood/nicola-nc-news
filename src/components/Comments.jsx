@@ -1,16 +1,26 @@
 import { useEffect, useState } from 'react';
 import { getArticleCommentsByID } from '../utils/api';
-const Comments = (article_id) => {
+import PostComment from './PostComment';
+import { useParams } from 'react-router-dom';
+
+const Comments = () => {
 	const [comments, setComments] = useState([]);
+	const { article_id } = useParams();
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		getArticleCommentsByID(article_id.article_id).then(({ commentData }) => {
+		getArticleCommentsByID(article_id).then(({ commentData }) => {
 			setComments(commentData);
+			setIsLoading(false);
 		});
 	});
+	if (isLoading) {
+		return <p>Comments Loading ...</p>;
+	}
 
 	return (
 		<main>
+			<PostComment setComments={setComments} setIsLoading={setIsLoading} />
 			<ul className='comment_list'>
 				{comments.map((comment) => {
 					return (
@@ -23,7 +33,6 @@ const Comments = (article_id) => {
 					);
 				})}
 			</ul>
-			<p>Coments here</p>
 		</main>
 	);
 };
