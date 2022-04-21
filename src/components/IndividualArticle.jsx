@@ -6,16 +6,22 @@ const IndividualArticle = () => {
 	const { article_id } = useParams();
 	const [individualArticle, setIndividualArticle] = useState([]);
 	const [err, setErr] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		getArticlesByID(article_id)
 			.then(({ article }) => {
 				setIndividualArticle(article);
+				setIsLoading(false);
 			})
 			.catch((err) => {
 				setErr('Article not found');
 			});
 	}, [article_id]);
+
+	if (isLoading) {
+		return <p>Article Loading...</p>;
+	}
 	return (
 		<main>
 			<p>Individual Article number {article_id}</p>

@@ -45,3 +45,14 @@ export const getUsers = () => {
 		return data;
 	});
 };
+
+export const addComment = (user, newComment, article_id) => {
+	return articlesApi
+		.post(`/articles/${article_id}/comments`, {
+			username: user,
+			body: newComment,
+		})
+		.then(({ data }) => {
+			return data;
+		});
+};

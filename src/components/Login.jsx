@@ -6,8 +6,6 @@ const Login = () => {
 	const [usersList, setUsersList] = useState([]);
 	const { user, setUser } = useContext(UserContext);
 
-	console.log(user);
-
 	useEffect(() => {
 		getUsers().then(({ user }) => {
 			setUsersList(user);
@@ -19,6 +17,7 @@ const Login = () => {
 			<div className='Login_drop-down'>
 				<label>Select User:</label>
 				<select onChange={(e) => setUser(e.target.value)}>
+					<option>Please log in to comment/add</option>
 					{usersList.map((user) => {
 						return (
 							<option key={user.username} value={user.username}>
