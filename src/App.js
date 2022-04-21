@@ -3,11 +3,11 @@ import './App.css';
 import Header from './components/Header';
 import Articles from './components/Articles';
 import IndividualArticle from './components/IndividualArticle';
-
 import Login from './components/Login';
 import NavBar from './components/NavBar';
 
-function App() {
+function App(props) {
+	const { user, setUser, isLoggedIn } = props;
 	return (
 		<div className='App'>
 			<Header className='App-header' />

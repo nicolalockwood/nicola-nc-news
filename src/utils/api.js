@@ -39,3 +39,9 @@ export const getArticleCommentsByID = (article_id) => {
 			return data;
 		});
 };
+
+export const getUsers = () => {
+	return articlesApi.get('/users').then(({ data }) => {
+		return data;
+	});
+};
