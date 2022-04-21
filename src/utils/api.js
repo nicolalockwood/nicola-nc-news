@@ -56,3 +56,9 @@ export const addComment = (user, newComment, article_id) => {
 			return data;
 		});
 };
+
+export const deleteCommentByID = (comment_id) => {
+	return articlesApi.delete(`/comments/${comment_id}`).then(({ data }) => {
+		return data;
+	});
+};
