@@ -33,6 +33,31 @@
 	text-align: center;
 	justify-content: space-around;
 }
+.comment_list {
+	list-style-type: none;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	text-align: center;
+	justify-content: space-around;
+}
+
+.comment_cards {
+	text-align: center;
+	display: grid;
+	width: 500px;
+	margin: 1em;
+	padding: 1em 0.5em;
+	display: flex;
+	grid-template-columns: 2fr 1fr;
+	grid-template-areas: 'main side';
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #ffffff;
+	flex-wrap: wrap;
+	border: 2px solid pink;
 .Login {
 	border: 2px solid green;
 	display: grid;
@@ -45,6 +70,12 @@
 
 @media only screen and (min-width: 768px) {
 	.articleList {
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+	.comment_list {
 		padding: 0;
 		display: flex;
 		flex-wrap: wrap;
