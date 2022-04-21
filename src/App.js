@@ -16,7 +16,9 @@ function App(props) {
 			<Routes>
 				<Route path='/' element={<Articles />} />
 				<Route path='/articles' element={<Articles />} />
-				<Route path='/articles/:topic' element={<Articles />} />
+				<Route path='/articles/:topic/:sort_by' element={<Articles />} />
+				<Route path='/articles/:sort_by' element={<Articles />} />
+
 				<Route
 					path='/articles/article/:article_id'
 					element={<IndividualArticle />}

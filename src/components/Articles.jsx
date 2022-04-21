@@ -8,9 +8,11 @@ const Articles = () => {
 	const [articles, setArticles] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
-	const { topic } = useParams();
+	const { topic, sort_by } = useParams();
+	console.log(topic, sort_by);
+
 	useEffect(() => {
-		getArticles(topic)
+		getArticles(topic, sort_by)
 			.then(({ articles }) => {
 				setArticles(articles);
 				setIsLoading(false);
@@ -18,7 +20,7 @@ const Articles = () => {
 			.catch((err) => {
 				console.log(err.response.data);
 			});
-	}, [topic]);
+	}, [topic, sort_by]);
 
 	if (isLoading) {
 		return <p>Articles Loading...</p>;
@@ -26,6 +28,15 @@ const Articles = () => {
 
 	return (
 		<main>
+			<Link
+				to={`/articles/${topic}/created_at
+			`}
+			>
+				Sort by Date
+			</Link>
+			<Link to={`/articles/${topic}/comment_count`}>Sort by Comment Count</Link>
+			<Link to={`/articles/${topic}/votes`}>Sort by Votes</Link>
+
 			<ul className='articlesList'>
 				{articles.map((article) => {
 					return (
@@ -34,6 +45,8 @@ const Articles = () => {
 							<h3>Author:{article.author}</h3>
 							<p>{article.body}</p>
 							<p>Topic:{article.topic}</p>
+							<p>Created at: {article.created_at}</p>
+							<p>Comment count: {article.comment_count}</p>
 							<Link to={`/articles/article/${article.article_id}`}>
 								See More
 							</Link>
