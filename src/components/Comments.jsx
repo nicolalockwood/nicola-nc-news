@@ -21,16 +21,14 @@ const Comments = () => {
 
 	const deleteComment = (comment_id) => {
 		setDisableButton(true);
-		setComments((currComments) => {
-			return currComments.filter(
-				(comment) => comment.comment_id !== comment_id
-			);
-		});
-		deleteCommentByID(comment_id).catch(() => {
+
+		deleteCommentByID(comment_id).then((res) => {
 			setComments((currComments) => {
-				<p>Delete Unsuccessful</p>;
-				return currComments;
+				return currComments.filter(
+					(comment) => comment.comment_id !== comment_id
+				);
 			});
+			setDisableButton(false);
 		});
 	};
 
