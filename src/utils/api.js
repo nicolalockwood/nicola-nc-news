@@ -70,3 +70,16 @@ export const patchCommentVotesByID = (comment_id) => {
 			return data;
 		});
 };
+
+export const addArticle = (user, newBody, topic, title) => {
+	return articlesApi
+		.post(`/articles`, {
+			title: title,
+			topic: topic,
+			author: user,
+			body: newBody,
+		})
+		.then(({ data }) => {
+			return data;
+		});
+};

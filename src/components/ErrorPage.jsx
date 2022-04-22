@@ -1,5 +1,5 @@
 const ErrorPage = () => {
-	return <p>Invalid URL please try again</p>;
+	return <p>Invald URL please try again</p>;
 };
 
 export default ErrorPage;

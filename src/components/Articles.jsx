@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getArticles } from '../utils/api';
 import { Link } from 'react-router-dom';
 import Votes from './Votes';
+import ErrorPage from './ErrorPage';
 
 const Articles = () => {
 	const [articles, setArticles] = useState([]);
@@ -18,6 +19,7 @@ const Articles = () => {
 			.then(({ articles }) => {
 				setArticles(articles);
 				setIsLoading(false);
+				setError(null);
 			})
 			.catch((err) => {
 				console.log(err.response.data);
@@ -31,7 +33,7 @@ const Articles = () => {
 	}
 
 	if (error) {
-		return <p>Article topic not found!</p>;
+		return <p>Topic not found</p>;
 	}
 
 	return (
