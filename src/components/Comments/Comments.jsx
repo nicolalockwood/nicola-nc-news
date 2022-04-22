@@ -6,7 +6,7 @@ import { UserContext } from '../../contexts/User';
 import CommentVotes from './CommentVotes';
 
 const Comments = () => {
-	const { user, isLoggedIn } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 	const [comments, setComments] = useState([]);
 	const { article_id } = useParams();
 	const [isLoading, setIsLoading] = useState(true);
