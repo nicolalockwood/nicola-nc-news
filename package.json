@@ -36,5 +36,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "netlify-cli": "^10.0.0"
+  },
+  "homepage": "nicolas-news-app.netlify.app"
 }

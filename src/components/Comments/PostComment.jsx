@@ -1,5 +1,5 @@
-import { addComment } from '../utils/api';
-import { UserContext } from '../contexts/User';
+import { addComment } from '../../utils/api';
+import { UserContext } from '../../contexts/User';
 import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -38,8 +38,8 @@ const PostComment = ({ setComments, setIsLoading }) => {
 						value={newComment}
 						onChange={(e) => setNewComment(e.target.value)}
 						required
-						minlength='1'
-						maxlength='100'
+						minLength='1'
+						maxLength='100'
 					></textarea>
 					<button>Post</button>
 					<p>{commentMessage}</p>

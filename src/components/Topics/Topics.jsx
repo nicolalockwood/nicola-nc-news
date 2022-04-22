@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getTopics } from '../../utils/api';
+import PostTopic from './PostTopic';
 
 const Topics = () => {
 	const [topics, setTopics] = useState([]);
@@ -12,9 +13,13 @@ const Topics = () => {
 				setTopics(topics);
 			})
 			.catch((err) => {
-				setErr('Topic not found, please add and try again');
+				setErr({ err });
 			});
-	}, []);
+	}, [topics]);
+
+	if (err) {
+		return <p>Issue loading topics</p>;
+	}
 
 	return (
 		<main>
@@ -31,6 +36,7 @@ const Topics = () => {
 						<Link to={'/articles'}>All articles</Link>
 					</li>
 				</ul>
+				<PostTopic setTopics={setTopics} />
 			</div>
 		</main>
 	);

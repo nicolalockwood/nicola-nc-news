@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getArticlesByID } from '../utils/api';
-import Comments from './Comments';
+import { getArticlesByID } from '../../utils/api';
+import Comments from '../Comments/Comments';
 const IndividualArticle = () => {
 	const { article_id } = useParams();
 	const [individualArticle, setIndividualArticle] = useState([]);

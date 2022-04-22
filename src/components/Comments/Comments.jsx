@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
-import { getArticleCommentsByID, deleteCommentByID } from '../utils/api';
+import { getArticleCommentsByID, deleteCommentByID } from '../../utils/api';
 import PostComment from './PostComment';
 import { useParams } from 'react-router-dom';
-import { UserContext } from '../contexts/User';
+import { UserContext } from '../../contexts/User';
 import CommentVotes from './CommentVotes';
 
 const Comments = () => {

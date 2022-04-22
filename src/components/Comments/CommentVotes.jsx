@@ -1,4 +1,4 @@
-import { patchCommentVotesByID } from '../utils/api';
+import { patchCommentVotesByID } from '../../utils/api';
 import { useState } from 'react';
 
 const CommentVotes = ({ votes, comment_id }) => {

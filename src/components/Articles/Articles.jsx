@@ -1,16 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { getArticles } from '../utils/api';
+import { deleteArticleByID, getArticles } from '../../utils/api';
 import { Link } from 'react-router-dom';
 import Votes from './Votes';
-import ErrorPage from './ErrorPage';
+import PostArticle from './PostArticle';
+import { UserContext } from '../../contexts/User';
 
 const Articles = () => {
+	const { user } = useContext(UserContext);
 	const [articles, setArticles] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [sortBy, setSortBy] = useState('created_at');
 	const [order, setOrder] = useState('DESC');
 	const [error, setError] = useState(null);
+	const [disableButton, setDisableButton] = useState(false);
 
 	const { topic } = useParams();
 
@@ -20,6 +23,9 @@ const Articles = () => {
 				setArticles(articles);
 				setIsLoading(false);
 				setError(null);
+				if (articles.length === 0) {
+					console.log('Yeah they are 0');
+				}
 			})
 			.catch((err) => {
 				console.log(err.response.data);
@@ -27,6 +33,18 @@ const Articles = () => {
 				setIsLoading(false);
 			});
 	}, [topic, sortBy, order]);
+
+	const deleteArticle = (article_id) => {
+		setDisableButton(true);
+		deleteArticleByID(article_id).then((res) => {
+			setArticles((currArticles) => {
+				return currArticles.filter(
+					(article) => article.article_id !== article_id
+				);
+			});
+			setDisableButton(false);
+		});
+	};
 
 	if (isLoading) {
 		return <p>Articles Loading...</p>;
@@ -78,6 +96,10 @@ const Articles = () => {
 					Showing results by {sortBy} in order {order}
 				</p>
 			</section>
+			<PostArticle
+				setArticles={setArticles}
+				setIsLoading={setIsLoading}
+			></PostArticle>
 
 			<ul className='articlesList'>
 				{articles.map((article) => {
@@ -96,6 +118,16 @@ const Articles = () => {
 								votes={article.votes}
 								article_id={article.article_id}
 							></Votes>
+							<p>
+								{user === article.author ? (
+									<button
+										onClick={() => deleteArticle(article.article_id)}
+										disabled={disableButton}
+									>
+										Delete
+									</button>
+								) : null}
+							</p>
 						</li>
 					);
 				})}

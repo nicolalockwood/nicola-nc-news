@@ -71,15 +71,35 @@ export const patchCommentVotesByID = (comment_id) => {
 		});
 };
 
-export const addArticle = (user, newBody, topic, title) => {
+export const addArticle = (user, newArticle, topic, title) => {
 	return articlesApi
 		.post(`/articles`, {
 			title: title,
 			topic: topic,
 			author: user,
-			body: newBody,
+			body: newArticle,
 		})
 		.then(({ data }) => {
+			return data;
+		});
+};
+
+export const deleteArticleByID = (article_id) => {
+	return articlesApi.delete(`/articles/${article_id}`).then(({ data }) => {
+		return data;
+	});
+};
+
+export const addTopic = (newTopic, newDescription) => {
+	return articlesApi
+		.post(`/topics`, {
+			slug: newTopic,
+			description: newDescription,
+		})
+		.then(({ data }) => {
+			if (data.length === 0) {
+				console.log(data);
+			}
 			return data;
 		});
 };

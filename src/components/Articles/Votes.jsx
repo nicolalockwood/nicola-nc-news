@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { patchVotesByID } from '../utils/api';
+import { patchVotesByID } from '../../utils/api';
 
 const Votes = ({ votes, article_id }) => {
 	const [optomisticVotes, setOptomisticVotes] = useState(0);
