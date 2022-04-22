@@ -56,3 +56,17 @@ export const addComment = (user, newComment, article_id) => {
 			return data;
 		});
 };
+
+export const deleteCommentByID = (comment_id) => {
+	return articlesApi.delete(`/comments/${comment_id}`).then(({ data }) => {
+		return data;
+	});
+};
+
+export const patchCommentVotesByID = (comment_id) => {
+	return articlesApi
+		.patch(`/comments/${comment_id}`, { inc_votes: 1 })
+		.then(({ data }) => {
+			return data;
+		});
+};
