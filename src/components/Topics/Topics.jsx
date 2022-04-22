@@ -23,9 +23,7 @@ const Topics = () => {
 					{topics.map((item) => {
 						return (
 							<li key={item.slug} value={item.slug}>
-								<Link to={`/articles/${item.slug}/created_at`}>
-									{item.slug}
-								</Link>
+								<Link to={`/articles/${item.slug}`}>{item.slug}</Link>
 							</li>
 						);
 					})}

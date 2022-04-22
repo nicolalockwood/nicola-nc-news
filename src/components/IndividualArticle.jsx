@@ -13,6 +13,7 @@ const IndividualArticle = () => {
 			.then(({ article }) => {
 				setIndividualArticle(article);
 				setIsLoading(false);
+				setError(null);
 			})
 			.catch((err) => {
 				console.log(err.response.data);
