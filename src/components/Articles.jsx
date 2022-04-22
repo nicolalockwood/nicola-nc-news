@@ -7,11 +7,14 @@ import Votes from './Votes';
 const Articles = () => {
 	const [articles, setArticles] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [sortBy, setSortBy] = useState('created_at');
+	const [order, setOrder] = useState('DESC');
 	const [error, setError] = useState(null);
 
 	const { topic } = useParams();
+
 	useEffect(() => {
-		getArticles(topic)
+		getArticles(topic, sortBy, order)
 			.then(({ articles }) => {
 				setArticles(articles);
 				setIsLoading(false);
@@ -21,7 +24,7 @@ const Articles = () => {
 				setError({ err });
 				setIsLoading(false);
 			});
-	}, [topic]);
+	}, [topic, sortBy, order]);
 
 	if (isLoading) {
 		return <p>Articles Loading...</p>;
@@ -33,6 +36,47 @@ const Articles = () => {
 
 	return (
 		<main>
+			<section className='filter_buttons'>
+				<button
+					onClick={(e) => {
+						setSortBy('created_at');
+					}}
+				>
+					Sort By Date
+				</button>
+				<button
+					onClick={(e) => {
+						setSortBy('comment_count');
+					}}
+				>
+					Sort By Comment Count
+				</button>
+				<button
+					onClick={(e) => {
+						setSortBy('votes');
+					}}
+				>
+					Sort By Vote Count
+				</button>
+				<button
+					onClick={(e) => {
+						setOrder('ASC');
+					}}
+				>
+					Order Ascending
+				</button>
+				<button
+					onClick={(e) => {
+						setOrder('DESC');
+					}}
+				>
+					Order Descending
+				</button>
+				<p>
+					Showing results by {sortBy} in order {order}
+				</p>
+			</section>
+
 			<ul className='articlesList'>
 				{articles.map((article) => {
 					return (
@@ -41,6 +85,8 @@ const Articles = () => {
 							<h3>Author:{article.author}</h3>
 							<p>{article.body}</p>
 							<p>Topic:{article.topic}</p>
+							<p>Created at: {article.created_at}</p>
+							<p>Comment count: {article.comment_count}</p>
 							<Link to={`/articles/article/${article.article_id}`}>
 								See More
 							</Link>

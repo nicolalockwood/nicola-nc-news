@@ -10,6 +10,10 @@ const PostComment = ({ setComments, setIsLoading }) => {
 	const [commentMessage, setCommentMessage] = useState('');
 
 	const handleSubmit = (e) => {
+		if (!newComment.length > 0) {
+			setCommentMessage('Please add a comment before submitting');
+		}
+
 		setIsLoading(true);
 		setCommentMessage('Comment sent thank you!');
 		e.preventDefault();
@@ -30,8 +34,12 @@ const PostComment = ({ setComments, setIsLoading }) => {
 				<p>{user} Please add a comment below!</p>
 				<form onSubmit={handleSubmit}>
 					<textarea
+						id={newComment}
 						value={newComment}
 						onChange={(e) => setNewComment(e.target.value)}
+						required
+						minlength='1'
+						maxlength='100'
 					></textarea>
 					<button>Post</button>
 					<p>{commentMessage}</p>
