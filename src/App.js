@@ -9,25 +9,22 @@ import ErrorPage from './components/ErrorPage';
 import { useState } from 'react';
 
 function App() {
-	const [articles, setArticles] = useState([]);
 	return (
 		<div className='App'>
-			<Header className='App-header' />
-			<Login />
-			<Topics />
+			<div className='container'>
+				<div className='row'>
+					<Header className='App-header' />
+				</div>
+				<div className='row'>
+					<Login />
+					<Topics />
+				</div>
+			</div>
+
 			<Routes>
-				<Route
-					path='/'
-					element={<Articles articles={articles} setArticles={setArticles} />}
-				/>
-				<Route
-					path='/articles'
-					element={<Articles articles={articles} setArticles={setArticles} />}
-				/>
-				<Route
-					path='/articles/:topic'
-					element={<Articles articles={articles} setArticles={setArticles} />}
-				/>
+				<Route path='/' element={<Articles />} />
+				<Route path='/articles' element={<Articles />} />
+				<Route path='/articles/:topic' element={<Articles />} />
 
 				<Route
 					path='/articles/article/:article_id'

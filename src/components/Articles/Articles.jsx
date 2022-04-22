@@ -110,7 +110,10 @@ const Articles = () => {
 							<p>{article.body}</p>
 							<p>Topic:{article.topic}</p>
 							<p>Created at: {article.created_at}</p>
-							<p>Comment count: {article.comment_count}</p>
+							<p>
+								Comment count:
+								<span class='badge bg-secondary'>{article.comment_count}</span>
+							</p>
 							<Link to={`/articles/article/${article.article_id}`}>
 								See More
 							</Link>
