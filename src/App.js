@@ -5,6 +5,7 @@ import Articles from './components/Articles';
 import IndividualArticle from './components/IndividualArticle';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
+import ErrorPage from './components/ErrorPage';
 
 function App(props) {
 	const { user, setUser, isLoggedIn } = props;
@@ -22,6 +23,7 @@ function App(props) {
 					path='/articles/article/:article_id'
 					element={<IndividualArticle />}
 				/>
+				<Route path='*' element={<ErrorPage />} />
 			</Routes>
 		</div>
 	);

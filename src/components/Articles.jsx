@@ -9,6 +9,7 @@ const Articles = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [sortBy, setSortBy] = useState('created_at');
 	const [order, setOrder] = useState('DESC');
+	const [error, setError] = useState(null);
 
 	const { topic } = useParams();
 
@@ -20,11 +21,17 @@ const Articles = () => {
 			})
 			.catch((err) => {
 				console.log(err.response.data);
+				setError({ err });
+				setIsLoading(false);
 			});
 	}, [topic, sortBy, order]);
 
 	if (isLoading) {
 		return <p>Articles Loading...</p>;
+	}
+
+	if (error) {
+		return <p>Article topic not found!</p>;
 	}
 
 	return (
