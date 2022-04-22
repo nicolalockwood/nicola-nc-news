@@ -7,6 +7,7 @@ import Votes from './Votes';
 const Articles = () => {
 	const [articles, setArticles] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [error, setError] = useState(null);
 
 	const { topic } = useParams();
 	useEffect(() => {
@@ -17,11 +18,17 @@ const Articles = () => {
 			})
 			.catch((err) => {
 				console.log(err.response.data);
+				setError({ err });
+				setIsLoading(false);
 			});
 	}, [topic]);
 
 	if (isLoading) {
 		return <p>Articles Loading...</p>;
+	}
+
+	if (error) {
+		return <p>Article topic not found!</p>;
 	}
 
 	return (

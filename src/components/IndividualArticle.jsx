@@ -5,7 +5,7 @@ import Comments from './Comments';
 const IndividualArticle = () => {
 	const { article_id } = useParams();
 	const [individualArticle, setIndividualArticle] = useState([]);
-	const [err, setErr] = useState(null);
+	const [error, setError] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
@@ -15,12 +15,18 @@ const IndividualArticle = () => {
 				setIsLoading(false);
 			})
 			.catch((err) => {
-				setErr('Article not found');
+				console.log(err.response.data);
+				setError({ err });
+				setIsLoading(false);
 			});
 	}, [article_id]);
 
 	if (isLoading) {
 		return <p>Article Loading...</p>;
+	}
+
+	if (error) {
+		return <p>Article not found</p>;
 	}
 	return (
 		<main>
