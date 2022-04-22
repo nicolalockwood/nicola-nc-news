@@ -64,7 +64,6 @@ export const deleteCommentByID = (comment_id) => {
 };
 
 export const patchCommentVotesByID = (comment_id) => {
-	console.log(comment_id);
 	return articlesApi
 		.patch(`/comments/${comment_id}`, { inc_votes: 1 })
 		.then(({ data }) => {

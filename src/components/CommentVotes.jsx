@@ -5,7 +5,7 @@ const CommentVotes = ({ votes, comment_id }) => {
 	const [optomisitcCommentVotes, setOptomisiticCommentVotes] = useState(0);
 
 	const increaseVoteCount = () => {
-		setOptomisiticCommentVotes((currVotes) => currVotes + 1);
+		setOptomisiticCommentVotes((currVotes) => currVotes);
 		patchCommentVotesByID(comment_id)
 			.then((data) => {
 				console.log(data);
