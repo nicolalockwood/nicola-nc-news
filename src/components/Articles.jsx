@@ -7,12 +7,13 @@ import Votes from './Votes';
 const Articles = () => {
 	const [articles, setArticles] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [sortBy, setSortBy] = useState('created_at');
+	const [order, setOrder] = useState('DESC');
 
-	const { topic, sort_by } = useParams();
-	console.log(topic, sort_by);
+	const { topic } = useParams();
 
 	useEffect(() => {
-		getArticles(topic, sort_by)
+		getArticles(topic, sortBy, order)
 			.then(({ articles }) => {
 				setArticles(articles);
 				setIsLoading(false);
@@ -20,7 +21,7 @@ const Articles = () => {
 			.catch((err) => {
 				console.log(err.response.data);
 			});
-	}, [topic, sort_by]);
+	}, [topic, sortBy, order]);
 
 	if (isLoading) {
 		return <p>Articles Loading...</p>;
@@ -28,14 +29,46 @@ const Articles = () => {
 
 	return (
 		<main>
-			<Link
-				to={`/articles/${topic}/created_at
-			`}
-			>
-				Sort by Date
-			</Link>
-			<Link to={`/articles/${topic}/comment_count`}>Sort by Comment Count</Link>
-			<Link to={`/articles/${topic}/votes`}>Sort by Votes</Link>
+			<section className='filter_buttons'>
+				<button
+					onClick={(e) => {
+						setSortBy('created_at');
+					}}
+				>
+					Sort By Date
+				</button>
+				<button
+					onClick={(e) => {
+						setSortBy('comment_count');
+					}}
+				>
+					Sort By Comment Count
+				</button>
+				<button
+					onClick={(e) => {
+						setSortBy('votes');
+					}}
+				>
+					Sort By Vote Count
+				</button>
+				<button
+					onClick={(e) => {
+						setOrder('ASC');
+					}}
+				>
+					Order Ascending
+				</button>
+				<button
+					onClick={(e) => {
+						setOrder('DESC');
+					}}
+				>
+					Order Descending
+				</button>
+				<p>
+					Showing results by {sortBy} in order {order}
+				</p>
+			</section>
 
 			<ul className='articlesList'>
 				{articles.map((article) => {
