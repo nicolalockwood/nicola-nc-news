@@ -19,7 +19,7 @@ const PostComment = ({ setComments, setIsLoading }) => {
 		e.preventDefault();
 		addComment(user, newComment, article_id).then(({ newComment }) => {
 			setComments((currComments) => {
-				const newComments = [...currComments, newComment];
+				const newComments = [newComment, ...currComments];
 				return newComments;
 			});
 			setIsLoading(false);
@@ -32,8 +32,13 @@ const PostComment = ({ setComments, setIsLoading }) => {
 		return (
 			<main>
 				<p>{user} Please add a comment below!</p>
-				<form onSubmit={handleSubmit}>
+				<form className='input-group mb-3' onSubmit={handleSubmit}>
 					<textarea
+						type='text'
+						className='form-control'
+						placeholder='Comment Here'
+						aria-label='comment'
+						aria-describedby='button-addon2'
 						id={newComment}
 						value={newComment}
 						onChange={(e) => setNewComment(e.target.value)}
@@ -41,7 +46,8 @@ const PostComment = ({ setComments, setIsLoading }) => {
 						minLength='1'
 						maxLength='100'
 					></textarea>
-					<button>Post</button>
+					<button className='postButton'>Post</button>
+
 					<p>{commentMessage}</p>
 				</form>
 			</main>

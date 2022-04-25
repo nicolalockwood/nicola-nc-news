@@ -17,9 +17,12 @@ const Votes = ({ votes, article_id }) => {
 
 	return (
 		<div className='votes'>
-			<p className='vote_count'>Votes: {votes + optomisticVotes}</p>
-			<button onClick={increaseVoteCount} disabled={optomisticVotes > 0}>
-				I Agree!!! Have a vote
+			<button
+				className='articleVote_count'
+				onClick={increaseVoteCount}
+				disabled={optomisticVotes > 0}
+			>
+				👍{votes + optomisticVotes}
 			</button>
 		</div>
 	);

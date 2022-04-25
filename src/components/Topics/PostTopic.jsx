@@ -1,6 +1,9 @@
 import { addTopic } from '../../utils/api';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../contexts/User';
+// import Modal from 'react-modal';
+
+// Modal.setAppElement(PostTopic);
 
 const PostTopic = ({ setTopics }) => {
 	const [newTopic, setNewTopic] = useState('');
@@ -27,10 +30,19 @@ const PostTopic = ({ setTopics }) => {
 	if (isLoggedIn) {
 		return (
 			<main className='Add_Topic'>
-				<p>Post a new topic here</p>
-				<form onSubmit={handleSubmit}>
-					<label id={newTopic}>New Topic:</label>
+				<form
+					className='input-group input-group-sm mb-3'
+					onSubmit={handleSubmit}
+				>
+					<span className='input-group-text' id='inputGroup-sizing-sm'>
+						New Topic
+					</span>
+
 					<textarea
+						type='text'
+						className='form-control'
+						aria-label='Sizing example input'
+						aria-describedby='inputGroup-sizing-sm'
 						id={newTopic}
 						value={newTopic}
 						onChange={(e) => setNewTopic(e.target.value)}
@@ -38,8 +50,14 @@ const PostTopic = ({ setTopics }) => {
 						minLength='1'
 						maxLength='10'
 					></textarea>
-					<label>Description</label>
+					<span className='input-group-text' id='inputGroup-sizing-sm'>
+						Description
+					</span>
 					<textarea
+						type='text'
+						className='form-control'
+						aria-label='Sizing example input'
+						aria-describedby='inputGroup-sizing-sm'
 						id={newDescription}
 						value={newDescription}
 						onChange={(e) => setNewDescription(e.target.value)}
@@ -47,7 +65,7 @@ const PostTopic = ({ setTopics }) => {
 						minLength='1'
 						maxLength='50'
 					></textarea>
-					<button>Add Topic</button>
+					<button className='postButton'>Add Topic</button>
 					<p>{topicMessage}</p>
 				</form>
 			</main>

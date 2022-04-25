@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import Votes from './Votes';
 import PostArticle from './PostArticle';
 import { UserContext } from '../../contexts/User';
+import SortButtons from './SortButtons';
+import { Collapse } from 'react-collapse';
 
 const Articles = () => {
 	const { user } = useContext(UserContext);
@@ -14,25 +16,23 @@ const Articles = () => {
 	const [order, setOrder] = useState('DESC');
 	const [error, setError] = useState(null);
 	const [disableButton, setDisableButton] = useState(false);
+	const [page, setPage] = useState(1);
 
 	const { topic } = useParams();
 
 	useEffect(() => {
-		getArticles(topic, sortBy, order)
+		getArticles(topic, sortBy, order, page)
 			.then(({ articles }) => {
 				setArticles(articles);
 				setIsLoading(false);
 				setError(null);
-				if (articles.length === 0) {
-					console.log('Yeah they are 0');
-				}
 			})
 			.catch((err) => {
 				console.log(err.response.data);
 				setError({ err });
 				setIsLoading(false);
 			});
-	}, [topic, sortBy, order]);
+	}, [topic, sortBy, order, page]);
 
 	const deleteArticle = (article_id) => {
 		setDisableButton(true);
@@ -56,85 +56,78 @@ const Articles = () => {
 
 	return (
 		<main>
-			<section className='filter_buttons'>
-				<button
-					onClick={(e) => {
-						setSortBy('created_at');
-					}}
-				>
-					Sort By Date
-				</button>
-				<button
-					onClick={(e) => {
-						setSortBy('comment_count');
-					}}
-				>
-					Sort By Comment Count
-				</button>
-				<button
-					onClick={(e) => {
-						setSortBy('votes');
-					}}
-				>
-					Sort By Vote Count
-				</button>
-				<button
-					onClick={(e) => {
-						setOrder('ASC');
-					}}
-				>
-					Order Ascending
-				</button>
-				<button
-					onClick={(e) => {
-						setOrder('DESC');
-					}}
-				>
-					Order Descending
-				</button>
-				<p>
-					Showing results by {sortBy} in order {order}
-				</p>
-			</section>
 			<PostArticle
 				setArticles={setArticles}
 				setIsLoading={setIsLoading}
 			></PostArticle>
+			<SortButtons
+				setSortBy={setSortBy}
+				setOrder={setOrder}
+				order={order}
+				sortBy={setSortBy}
+			/>
 
 			<ul className='articlesList'>
 				{articles.map((article) => {
 					return (
 						<li className='articlesList__article' key={article.article_id}>
-							<h2>{article.title}</h2>
-							<h3>Author:{article.author}</h3>
-							<p>{article.body}</p>
-							<p>Topic:{article.topic}</p>
-							<p>Created at: {article.created_at}</p>
-							<p>
-								Comment count:
-								<span class='badge bg-secondary'>{article.comment_count}</span>
-							</p>
-							<Link to={`/articles/article/${article.article_id}`}>
-								See More
-							</Link>
-							<Votes
-								votes={article.votes}
-								article_id={article.article_id}
-							></Votes>
-							<p>
-								{user === article.author ? (
-									<button
-										onClick={() => deleteArticle(article.article_id)}
-										disabled={disableButton}
-									>
-										Delete
-									</button>
-								) : null}
-							</p>
+							<h6 className='articleList_header'>
+								<strong>{article.author} </strong> {article.created_at} Topic:
+								{article.topic}
+							</h6>
+
+							<h6 className='articleList_title'>{article.title}</h6>
+
+							<p className='card-text'>{article.body}</p>
+							<div className='articleList_button-container'>
+								<Link
+									className='articleList_seemore-button'
+									to={`/articles/article/${article.article_id}`}
+								>
+									💬{article.comment_count} See More
+								</Link>
+
+								<Votes
+									votes={article.votes}
+									article_id={article.article_id}
+								></Votes>
+
+								<p>
+									{user === article.author ? (
+										<button
+											className='articleList_delete-button'
+											onClick={() => deleteArticle(article.article_id)}
+											disabled={disableButton}
+										>
+											🗑️ DELETE
+										</button>
+									) : null}
+								</p>
+							</div>
 						</li>
 					);
 				})}
 			</ul>
+			<section className='pagination'>
+				<button
+					className='pagination_prevpage'
+					onClick={(e) => {
+						setPage((currPage) => currPage - 1);
+					}}
+					disabled={page === 1}
+				>
+					Previous Page
+				</button>
+				<button
+					className='pagination_nextpage'
+					onClick={(e) => {
+						setPage((currPage) => currPage + 1);
+					}}
+					disabled={articles.length < 10}
+				>
+					Next Page
+				</button>
+			</section>
 		</main>
 	);
 };

@@ -6,7 +6,6 @@ import PostTopic from './PostTopic';
 const Topics = () => {
 	const [topics, setTopics] = useState([]);
 	const [err, setErr] = useState(null);
-
 	useEffect(() => {
 		getTopics()
 			.then(({ topics }) => {
@@ -24,19 +23,26 @@ const Topics = () => {
 	return (
 		<main>
 			<div>
-				<ul className='topic__list'>
+				<ul className='nav nav-tabs' id='myTab' role='tablist'>
+					<li className='nav-item' key='All articles'>
+						<Link className='nav-link active' to={'/articles'}>
+							All articles
+						</Link>
+					</li>
 					{topics.map((item) => {
 						return (
-							<li key={item.slug} value={item.slug}>
-								<Link to={`/articles/${item.slug}`}>{item.slug}</Link>
+							<li className='nav-item' key={item.slug} value={item.slug}>
+								<Link className='nav-link active' to={`/articles/${item.slug}`}>
+									{item.slug}
+								</Link>
 							</li>
 						);
 					})}
-					<li key='All articles'>
-						<Link to={'/articles'}>All articles</Link>
+					<li>
+						{' '}
+						<PostTopic setTopics={setTopics} />
 					</li>
 				</ul>
-				<PostTopic setTopics={setTopics} />
 			</div>
 		</main>
 	);

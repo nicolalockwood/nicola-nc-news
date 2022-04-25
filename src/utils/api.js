@@ -4,9 +4,14 @@ const articlesApi = axios.create({
 	baseURL: 'https://nicola-nc-news.herokuapp.com/api',
 });
 
-export const getArticles = (topic = null, sort_by = null, order = null) => {
+export const getArticles = (
+	topic = null,
+	sort_by = null,
+	order = null,
+	page
+) => {
 	return articlesApi
-		.get('/articles', { params: { topic, sort_by, order } })
+		.get('/articles', { params: { topic, sort_by, order, page } })
 		.then(({ data }) => {
 			return data;
 		});
@@ -32,9 +37,9 @@ export const patchVotesByID = (article_id) => {
 		});
 };
 
-export const getArticleCommentsByID = (article_id) => {
+export const getArticleCommentsByID = (article_id, page) => {
 	return articlesApi
-		.get(`/articles/${article_id}/comments`)
+		.get(`/articles/${article_id}/comments`, { params: page })
 		.then(({ data }) => {
 			return data;
 		});

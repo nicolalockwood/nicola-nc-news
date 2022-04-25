@@ -11,10 +11,6 @@ const PostArticle = ({ setArticles, setIsLoading }) => {
 	const [title, setTitle] = useState('');
 
 	const handleSubmit = (e) => {
-		console.log(topic);
-		console.log(user);
-		console.log(newArticle);
-		console.log(title);
 		if (!newArticle.length > 0 || !title.length > 0) {
 			setArticleMessage('Please add title and article before submitting');
 		}
@@ -33,15 +29,29 @@ const PostArticle = ({ setArticles, setIsLoading }) => {
 		});
 	};
 
+	if (user === 'Select User') {
+		return <p>Please select user & topic to post article</p>;
+	}
+
 	if (isLoggedIn && topic) {
 		return (
 			<main className='Add_article'>
 				<p>
 					{user} add your new article about {topic} here!
 				</p>
-				<form onSubmit={handleSubmit}>
-					<label>Title:</label>
+				<form
+					className='input-group input-group-sm mb-3'
+					onSubmit={handleSubmit}
+				>
+					<span className='input-group-text' id='inputGroup-sizing-sm'>
+						Article Title
+					</span>
+
 					<textarea
+						type='text'
+						className='form-control'
+						aria-label='Sizing example input'
+						aria-describedby='inputGroup-sizing-sm'
 						id={title}
 						value={title}
 						onChange={(e) => setTitle(e.target.value)}
@@ -49,8 +59,15 @@ const PostArticle = ({ setArticles, setIsLoading }) => {
 						minLength='1'
 						maxLength='40'
 					></textarea>
-					<label>Body:</label>
+					<span className='input-group-text' id='inputGroup-sizing-sm'>
+						Body
+					</span>
+
 					<textarea
+						type='text'
+						className='form-control'
+						aria-label='Sizing example input'
+						aria-describedby='inputGroup-sizing-sm'
 						id={newArticle}
 						value={newArticle}
 						onChange={(e) => setNewArticle(e.target.value)}
@@ -58,7 +75,7 @@ const PostArticle = ({ setArticles, setIsLoading }) => {
 						minLength='10'
 						maxLength='500'
 					></textarea>
-					<button>Post</button>
+					<button className='postButton'>Post</button>
 					<p>{articleMessage}</p>
 				</form>
 			</main>

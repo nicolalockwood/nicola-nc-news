@@ -5,7 +5,7 @@ const CommentVotes = ({ votes, comment_id }) => {
 	const [optomisitcCommentVotes, setOptomisiticCommentVotes] = useState(0);
 
 	const increaseVoteCount = () => {
-		setOptomisiticCommentVotes((currVotes) => currVotes);
+		setOptomisiticCommentVotes((currVotes) => currVotes + 1);
 		patchCommentVotesByID(comment_id)
 			.then((data) => {
 				console.log(data);
@@ -18,11 +18,12 @@ const CommentVotes = ({ votes, comment_id }) => {
 
 	return (
 		<div className='CommentVotes'>
-			<p className='CommentVotes_count'>
-				Votes {votes + optomisitcCommentVotes}
-			</p>
-			<button onClick={increaseVoteCount} disabled={optomisitcCommentVotes > 0}>
-				I agree!! Have a vote
+			<button
+				className='CommentVotes_count'
+				onClick={increaseVoteCount}
+				disabled={optomisitcCommentVotes > 0}
+			>
+				👍 {votes + optomisitcCommentVotes}
 			</button>
 		</div>
 	);

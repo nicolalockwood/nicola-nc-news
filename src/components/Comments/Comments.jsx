@@ -11,13 +11,14 @@ const Comments = () => {
 	const { article_id } = useParams();
 	const [isLoading, setIsLoading] = useState(true);
 	const [disableButton, setDisableButton] = useState(false);
+	const [page, setPage] = useState(1);
 
 	useEffect(() => {
-		getArticleCommentsByID(article_id).then(({ commentData }) => {
+		getArticleCommentsByID(article_id, page).then(({ commentData }) => {
 			setComments(commentData);
 			setIsLoading(false);
 		});
-	});
+	}, [page]);
 
 	const deleteComment = (comment_id) => {
 		setDisableButton(true);
@@ -36,34 +37,66 @@ const Comments = () => {
 		return <p>Comments Loading ...</p>;
 	}
 
+	if (user === 'Select User') {
+		return <p>Please select user to post article</p>;
+	}
+
 	return (
-		<main>
+		<main className='Comments'>
 			<PostComment setComments={setComments} setIsLoading={setIsLoading} />
+
 			<ul className='comment_list'>
 				{comments.map((comment) => {
 					return (
 						<li className='comment_cards' key={comment.comment_id}>
-							<h2>{comment.author}</h2>
-							<p>{comment.body}</p>
-							<CommentVotes
-								votes={comment.votes}
-								comment_id={comment.comment_id}
-							></CommentVotes>
-							<p>Created at:{comment.created_at}</p>
-							<p>
-								{user === comment.author ? (
-									<button
-										onClick={() => deleteComment(comment.comment_id)}
-										disabled={disableButton}
-									>
-										Delete
-									</button>
-								) : null}
-							</p>
+							<h6 className='card-title'>
+								<strong>{comment.author}</strong> {comment.created_at}
+							</h6>
+							<p className='comment_body'>{comment.body}</p>
+							<div className='container'>
+								<div className='row'>
+									<CommentVotes
+										className='col'
+										votes={comment.votes}
+										comment_id={comment.comment_id}
+									></CommentVotes>
+									<div className='col'>
+										{user === comment.author ? (
+											<button
+												className='comment_delete-button'
+												onClick={() => deleteComment(comment.comment_id)}
+												disabled={disableButton}
+											>
+												🗑️ DELETE
+											</button>
+										) : null}
+									</div>
+								</div>
+							</div>
 						</li>
 					);
 				})}
 			</ul>
+			<section className='pagination'>
+				<button
+					className='pagination_prevpage'
+					onClick={(e) => {
+						setPage((currPage) => currPage - 1);
+					}}
+					disabled={page === 1}
+				>
+					Previous Page
+				</button>
+				<button
+					className='pagination_nextpage'
+					onClick={(e) => {
+						setPage((currPage) => currPage + 1);
+					}}
+					disabled={comments.length < 10}
+				>
+					Next Page
+				</button>
+			</section>
 		</main>
 	);
 };
