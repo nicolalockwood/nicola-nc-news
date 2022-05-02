@@ -6,15 +6,22 @@ import PostTopic from './PostTopic';
 const Topics = () => {
 	const [topics, setTopics] = useState([]);
 	const [err, setErr] = useState(null);
+	const [hidePost, setHidePost] = useState(true);
+
 	useEffect(() => {
 		getTopics()
 			.then(({ topics }) => {
+				topics.push({ slug: '+' });
 				setTopics(topics);
 			})
 			.catch((err) => {
 				setErr({ err });
 			});
 	}, [topics]);
+
+	const handleClick = () => {
+		setHidePost(hidePost ? false : true);
+	};
 
 	if (err) {
 		return <p>Issue loading topics</p>;
@@ -30,19 +37,31 @@ const Topics = () => {
 						</Link>
 					</li>
 					{topics.map((item) => {
-						return (
-							<li className='nav-item' key={item.slug} value={item.slug}>
-								<Link className='nav-link active' to={`/articles/${item.slug}`}>
-									{item.slug}
-								</Link>
-							</li>
-						);
+						if (!item.description) {
+							return (
+								<li className='nav-item' key={item.slug} value={item.slug}>
+									<button className='nav-link active' onClick={handleClick}>
+										{item.slug}
+									</button>
+								</li>
+							);
+						} else {
+							return (
+								<li className='nav-item' key={item.slug} value={item.slug}>
+									<Link
+										className='nav-link active'
+										to={`/articles/${item.slug}`}
+									>
+										{item.slug}
+									</Link>
+								</li>
+							);
+						}
 					})}
-					<li>
-						{' '}
-						<PostTopic setTopics={setTopics} />
-					</li>
 				</ul>
+			</div>
+			<div>
+				<PostTopic setTopics={setTopics} hidePost={hidePost} />
 			</div>
 		</main>
 	);

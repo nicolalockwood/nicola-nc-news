@@ -1,6 +1,7 @@
 const SortButtons = ({ setSortBy, setOrder, order, sortBy }) => {
 	return (
 		<section className='Button_bar'>
+			Sort By:
 			<button
 				type='button'
 				className='Order_button'

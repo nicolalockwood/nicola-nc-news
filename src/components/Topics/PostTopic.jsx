@@ -5,7 +5,7 @@ import { UserContext } from '../../contexts/User';
 
 // Modal.setAppElement(PostTopic);
 
-const PostTopic = ({ setTopics }) => {
+const PostTopic = ({ setTopics, hidePost }) => {
 	const [newTopic, setNewTopic] = useState('');
 	const [newDescription, setNewDescription] = useState('');
 	const { isLoggedIn } = useContext(UserContext);
@@ -27,7 +27,7 @@ const PostTopic = ({ setTopics }) => {
 			setTimeout(() => setTopicMessage(''), 2000);
 		});
 	};
-	if (isLoggedIn) {
+	if (!hidePost) {
 		return (
 			<main className='Add_Topic'>
 				<form

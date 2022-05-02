@@ -39,7 +39,7 @@ export const patchVotesByID = (article_id) => {
 
 export const getArticleCommentsByID = (article_id, page) => {
 	return articlesApi
-		.get(`/articles/${article_id}/comments`, { params: page })
+		.get(`/articles/${article_id}/comments`, { params: { page } })
 		.then(({ data }) => {
 			return data;
 		});

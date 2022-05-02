@@ -73,7 +73,7 @@ const PostArticle = ({ setArticles, setIsLoading }) => {
 						onChange={(e) => setNewArticle(e.target.value)}
 						required
 						minLength='10'
-						maxLength='500'
+						maxLength='3000'
 					></textarea>
 					<button className='postButton'>Post</button>
 					<p>{articleMessage}</p>
