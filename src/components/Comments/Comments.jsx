@@ -18,7 +18,7 @@ const Comments = () => {
 			setComments(commentData);
 			setIsLoading(false);
 		});
-	}, [page]);
+	}, [article_id, page]);
 
 	const deleteComment = (comment_id) => {
 		setDisableButton(true);
@@ -53,25 +53,22 @@ const Comments = () => {
 								<strong>{comment.author}</strong> {comment.created_at}
 							</h6>
 							<p className='comment_body'>{comment.body}</p>
-							<div className='container'>
-								<div className='row'>
-									<CommentVotes
-										className='col'
-										votes={comment.votes}
-										comment_id={comment.comment_id}
-									></CommentVotes>
-									<div className='col'>
-										{user === comment.author ? (
-											<button
-												className='comment_delete-button'
-												onClick={() => deleteComment(comment.comment_id)}
-												disabled={disableButton}
-											>
-												🗑️ DELETE
-											</button>
-										) : null}
-									</div>
-								</div>
+							<div className='commentList_button-container'>
+								<CommentVotes
+									votes={comment.votes}
+									comment_id={comment.comment_id}
+								></CommentVotes>
+								<p>
+									{user === comment.author ? (
+										<button
+											className='commentList_delete-button'
+											onClick={() => deleteComment(comment.comment_id)}
+											disabled={disableButton}
+										>
+											🗑️ DELETE
+										</button>
+									) : null}
+								</p>
 							</div>
 						</li>
 					);

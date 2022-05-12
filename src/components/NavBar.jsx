@@ -2,7 +2,7 @@ import { UserContext } from '../contexts/User';
 import { useContext, useEffect, useState } from 'react';
 import { getUsers } from '../utils/api';
 
-import logo from './Logo.jpeg';
+import logo from './logo.png';
 
 const NavBar = () => {
 	const [usersList, setUsersList] = useState([]);
@@ -18,9 +18,8 @@ const NavBar = () => {
 		<nav className='navbar navbar-light bg-light'>
 			<div className='navbar-brand'>
 				<img
+					height={100}
 					className='d-inline-block align-top'
-					width='100'
-					height='50'
 					src={logo}
 					alt='An emoji logo'
 				></img>

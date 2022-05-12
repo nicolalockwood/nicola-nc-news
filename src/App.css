@@ -52,6 +52,16 @@
 	text-align: center;
 	justify-content: space-around;
 }
+.header-image {
+	height: 50%;
+	width: 50%;
+	grid-area: main;
+}
+
+.navbar {
+	grid-template-columns: 2fr 1fr;
+	grid-template-areas: 'main side';
+}
 
 .individual_article {
 	background-color: #ffffff;
@@ -114,9 +124,6 @@
 	grid-template-areas: 'button1 button2 button3';
 	grid-gap: 5px;
 }
-.Header__image {
-	size: 33%;
-}
 
 .Comments {
 	background-color: #ffffff;
@@ -152,19 +159,26 @@
 	border-radius: 5px;
 }
 
+.commentList_button-container {
+	display: grid;
+	grid-template-areas: 'button1 button2 button3';
+	grid-gap: 5px;
+}
+
 .CommentVotes_count {
 	background-color: #ffffff;
 	border: #f8f9fa;
 	border-radius: 5px;
 	padding: 5px;
+	grid-area: button1;
 }
 
-.comment_delete-button {
+.commentList_delete-button {
 	background-color: #ffffff;
 	border: #f8f9fa;
 	border-radius: 5px;
 	padding: 5px;
-	margin-left: 20rem;
+	grid-area: button3;
 }
 
 .Add_article {

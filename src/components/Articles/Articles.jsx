@@ -6,7 +6,6 @@ import Votes from './Votes';
 import PostArticle from './PostArticle';
 import { UserContext } from '../../contexts/User';
 import SortButtons from './SortButtons';
-import { Collapse } from 'react-collapse';
 
 const Articles = () => {
 	const { user } = useContext(UserContext);
@@ -78,7 +77,7 @@ const Articles = () => {
 
 							<h6 className='articleList_title'>{article.title}</h6>
 
-							<p className='card-text'>{article.body}</p>
+							<p className='card-text'>{article.body.substring(0, 150)}... </p>
 							<div className='articleList_button-container'>
 								<Link
 									className='articleList_seemore-button'
