@@ -23,6 +23,10 @@ const Topics = () => {
 		setHidePost(hidePost ? false : true);
 	};
 
+	const handleClick = () => {
+		setHidePost(hidePost ? false : true);
+	};
+
 	if (err) {
 		return <p>Issue loading topics</p>;
 	}
