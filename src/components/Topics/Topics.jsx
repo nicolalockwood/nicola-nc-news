@@ -11,7 +11,6 @@ const Topics = () => {
 	useEffect(() => {
 		getTopics()
 			.then(({ topics }) => {
-				topics.push({ slug: '+' });
 				setTopics(topics);
 			})
 			.catch((err) => {
@@ -37,27 +36,19 @@ const Topics = () => {
 						</Link>
 					</li>
 					{topics.map((item) => {
-						if (!item.description) {
-							return (
-								<li className='nav-item' key={item.slug} value={item.slug}>
-									<button className='nav-link active' onClick={handleClick}>
-										{item.slug}
-									</button>
-								</li>
-							);
-						} else {
-							return (
-								<li className='nav-item' key={item.slug} value={item.slug}>
-									<Link
-										className='nav-link active'
-										to={`/articles/${item.slug}`}
-									>
-										{item.slug}
-									</Link>
-								</li>
-							);
-						}
+						return (
+							<li className='nav-item' key={item.slug} value={item.slug}>
+								<Link className='nav-link active' to={`/articles/${item.slug}`}>
+									{item.slug}
+								</Link>
+							</li>
+						);
 					})}
+					<li className='nav-item' key='+' value={'+'}>
+						<button className='nav-link active' onClick={handleClick}>
+							{'+'}
+						</button>
+					</li>
 				</ul>
 			</div>
 			<div>
