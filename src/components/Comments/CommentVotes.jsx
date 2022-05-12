@@ -8,7 +8,6 @@ const CommentVotes = ({ votes, comment_id }) => {
 		setOptomisiticCommentVotes((currVotes) => currVotes + 1);
 		patchCommentVotesByID(comment_id)
 			.then((data) => {
-				console.log(data);
 				return data;
 			})
 			.catch(() => {

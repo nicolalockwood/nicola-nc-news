@@ -8,7 +8,6 @@ import { UserContext } from '../../contexts/User';
 const PostTopic = ({ setTopics, hidePost }) => {
 	const [newTopic, setNewTopic] = useState('');
 	const [newDescription, setNewDescription] = useState('');
-	const { isLoggedIn } = useContext(UserContext);
 	const [topicMessage, setTopicMessage] = useState('');
 
 	const handleSubmit = (e) => {

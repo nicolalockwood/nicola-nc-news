@@ -17,7 +17,7 @@ const Topics = () => {
 			.catch((err) => {
 				setErr({ err });
 			});
-	}, [topics]);
+	}, []);
 
 	const handleClick = () => {
 		setHidePost(hidePost ? false : true);

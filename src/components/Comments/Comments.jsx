@@ -18,7 +18,7 @@ const Comments = () => {
 			setComments(commentData);
 			setIsLoading(false);
 		});
-	}, [page]);
+	}, [article_id, page]);
 
 	const deleteComment = (comment_id) => {
 		setDisableButton(true);

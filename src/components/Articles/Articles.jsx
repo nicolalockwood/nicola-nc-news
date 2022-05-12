@@ -6,7 +6,6 @@ import Votes from './Votes';
 import PostArticle from './PostArticle';
 import { UserContext } from '../../contexts/User';
 import SortButtons from './SortButtons';
-import { Collapse } from 'react-collapse';
 
 const Articles = () => {
 	const { user } = useContext(UserContext);
