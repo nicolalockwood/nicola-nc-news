@@ -1,6 +1,5 @@
 import { addTopic } from '../../utils/api';
-import { useContext, useState } from 'react';
-import { UserContext } from '../../contexts/User';
+import { useState } from 'react';
 // import Modal from 'react-modal';
 
 // Modal.setAppElement(PostTopic);
