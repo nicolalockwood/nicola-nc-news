@@ -1,6 +1,5 @@
 import { addTopic } from '../../utils/api';
 import { useState } from 'react';
-
 // import Modal from 'react-modal';
 
 // Modal.setAppElement(PostTopic);
