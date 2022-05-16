@@ -21,8 +21,9 @@ const Articles = () => {
 
 	useEffect(() => {
 		getArticles(topic, sortBy, order, page)
-			.then(({ articles }) => {
-				setArticles(articles);
+			.then((data) => {
+				setArticles(data.articles);
+
 				setIsLoading(false);
 				setError(null);
 			})
